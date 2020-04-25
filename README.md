@@ -7,6 +7,8 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
+This is a preferable choice until now
+
 npm run serve
 ```
 
