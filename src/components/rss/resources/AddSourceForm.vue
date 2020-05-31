@@ -1,10 +1,30 @@
 <template>
   <mdb-row class="add-resource-form">
     <mdb-input
-      v-model="newResource"
+      v-model="link"
       size="sm"
       label="New resource link"
       icon="tag"
+      clear
+      type="text"
+      validate
+      error="wrong"
+      success="right"
+    />
+    <mdb-input
+      v-model="title"
+      size="sm"
+      label="Title"
+      clear
+      type="text"
+      validate
+      error="wrong"
+      success="right"
+    />
+    <mdb-input
+      v-model="description"
+      size="sm"
+      label="Description"
       clear
       type="text"
       validate
@@ -28,13 +48,24 @@ export default {
   data() {
     return {
       showModal: false,
-      newResource: ""
+      link: "", 
+      title: "",
+      description: ""
     };
   },
   methods: {
     addResource: function() {
-      this.$store.dispatch("addResource", this.newResource);
-      this.newResource = "";
+      let link = this.link
+      let title = this.title
+      let description = this.description
+      this.$store.dispatch("addResource", {
+        link,
+        title,
+        description
+      });
+      this.link = "";
+      this.title = "";
+      this.description = "";
     }
   }
 };
@@ -60,5 +91,9 @@ export default {
 
 .btn.btn-sm {
   font-size: 0.99rem;
+}
+
+.add-resource-form {
+  border: 3px;
 }
 </style>

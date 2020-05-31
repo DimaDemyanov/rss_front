@@ -20,7 +20,7 @@ const actions = {
 };
 
 function validateResource(resource) {
-  return resource.length != 0;
+  return resource.link.length != 0 && resource.title.length != 0;
 }
 
 const mutations = {
@@ -28,7 +28,9 @@ const mutations = {
     if (validateResource(resource)) {
       state.resources.unshift({
         id: id,
-        title: resource
+        link: resource.link,
+        title: resource.title,
+        description: resource.description
       });
       id++;
     }

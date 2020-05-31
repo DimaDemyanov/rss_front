@@ -4,8 +4,17 @@
     <ul>
       <mdb-list-group>
         <mdb-list-group-item class="source" v-for="resource in resources" v-bind:key="resource.id">
-          {{ resource.title }}
-          <button type="button" class="close" aria-label="Close" v-on:click="removeResource(resource.id)">
+          <pre>
+          <b>Link: </b>{{ resource.link }}
+          <b>Title: </b>{{ resource.title }}
+          <b>Description: </b>{{ resource.description }}
+          </pre>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            v-on:click="removeResource(resource.id)"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </mdb-list-group-item>
