@@ -86,14 +86,10 @@ export default {
 }
 
 .md-form {
-  width: 400px;
+  width: 350px;
 }
 
 .btn.btn-sm {
   font-size: 0.99rem;
-}
-
-.add-resource-form {
-  border: 3px;
 }
 </style>

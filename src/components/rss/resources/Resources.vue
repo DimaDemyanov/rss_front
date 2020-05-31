@@ -1,14 +1,12 @@
 <template>
-  <div class="resources">
+  <div class="resources-block">
     <AddSourceForm />
     <ul>
       <mdb-list-group>
         <mdb-list-group-item class="source" v-for="resource in resources" v-bind:key="resource.id">
-          <pre>
-          <b>Link: </b>{{ resource.link }}
-          <b>Title: </b>{{ resource.title }}
-          <b>Description: </b>{{ resource.description }}
-          </pre>
+          <pre><b>Link: </b>{{ resource.link }}
+<b>Title: </b>{{ resource.title }}
+<b>Description: </b>{{ resource.description }}</pre>
           <button
             type="button"
             class="close"
@@ -49,7 +47,7 @@ export default {
 
 <style scoped>
 .resources {
-  width: 500px;
+  max-width: 500px;
 }
 
 .source {

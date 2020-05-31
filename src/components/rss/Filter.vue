@@ -19,8 +19,8 @@ export default {
 
 <style scoped>
 .filter {
-  width: 400px;
-  height: 100px;
+  /* width: 400px;
+  height: 100px; */
   /* background-color: salmon; */
 }
 </style>

@@ -3,11 +3,11 @@
     <div class="resources">
       <Resources />
     </div>
-    <div class="rss-feeds">
-      <VueRssFeed :feedUrl="feedUrl" :name="name" :limit="limit" />
-    </div>
     <div class="filter">
       <FilterS />
+    </div>
+    <div class="rss-feeds">
+      <VueRssFeed :feedUrl="feedUrl" :name="name" :limit="limit" />
     </div>
   </div>
 </template>
@@ -36,22 +36,22 @@ export default {
 
 <style scoped>
 .resources {
+  max-width: 25%;
   position: sticky;
   float: left;
   top: 0;
 }
 
 .rss-feeds {
-  padding-left: 600px;
+  /* padding-left: 25%; */
+  margin: auto;
+  max-width: 50%;
 }
 
 .filter {
-  position: absolute;
-  right: 0;
-  top: 38px;
-  /* width: 500px; */
-  /* height: 100px; */
-  /* background-color: salmon; */
+  position: sticky;
+  float: right;
+  top: 0;
 }
 </style>
 
