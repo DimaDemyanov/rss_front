@@ -36,7 +36,8 @@ export default {
 
 <style scoped>
 .resources {
-  max-width: 25%;
+  width: 25%;
+  max-width: 1000px;
   position: sticky;
   float: left;
   top: 0;

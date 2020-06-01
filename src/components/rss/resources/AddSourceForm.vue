@@ -1,16 +1,5 @@
 <template>
-  <mdb-row class="add-resource-form">
-    <mdb-input
-      v-model="link"
-      size="sm"
-      label="New resource link"
-      icon="tag"
-      clear
-      type="text"
-      validate
-      error="wrong"
-      success="right"
-    />
+  <div class="add-resource-form">
     <mdb-input
       v-model="title"
       size="sm"
@@ -31,17 +20,27 @@
       error="wrong"
       success="right"
     />
+    <mdb-input
+      v-model="link"
+      size="sm"
+      label="New resource link"
+      clear
+      type="text"
+      validate
+      error="wrong"
+      success="right"
+    />
     <mdb-btn color="primary" size="sm" v-on:click="addResource">Add</mdb-btn>
-  </mdb-row>
+  </div>
 </template>
 
 <script>
-import { mdbRow, mdbInput, mdbBtn } from "mdbvue";
+import { mdbInput, mdbBtn } from "mdbvue";
+import { SOURCE_ADD, SOURSE_ERROR } from "@/store/actions/resources";
 
 export default {
   name: "FormsPage",
   components: {
-    mdbRow,
     mdbInput,
     mdbBtn
   },
@@ -55,17 +54,27 @@ export default {
   },
   methods: {
     addResource: function() {
-      let link = this.link
-      let title = this.title
-      let description = this.description
-      this.$store.dispatch("addResource", {
-        link,
-        title,
-        description
-      });
-      this.link = "";
-      this.title = "";
-      this.description = "";
+      let link = this.link.trim()
+      let title = this.title.trim()
+      let description = this.description.trim()
+      if ((link !== "") && (title !== "")) {
+        let newResource = {
+          link,
+          title,
+          description
+        }
+        this.$store.dispatch(
+          SOURCE_ADD,
+          newResource
+        );
+        this.link = "";
+        this.title = "";
+        this.description = "";
+      } else {
+        this.$store.commit(
+          SOURCE_ERROR
+        );
+      }
     }
   }
 };
@@ -86,7 +95,7 @@ export default {
 }
 
 .md-form {
-  width: 350px;
+  width: 90%;
 }
 
 .btn.btn-sm {

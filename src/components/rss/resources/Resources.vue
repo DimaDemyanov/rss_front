@@ -1,12 +1,15 @@
 <template>
   <div class="resources-block">
-    <AddSourceForm />
+    <AddSourceForm
+    />
     <ul>
       <mdb-list-group>
         <mdb-list-group-item class="source" v-for="resource in resources" v-bind:key="resource.id">
-          <pre><b>Link: </b>{{ resource.link }}
-<b>Title: </b>{{ resource.title }}
-<b>Description: </b>{{ resource.description }}</pre>
+          <div class="resource-info">
+            <p><b>Title: </b>{{ resource.title }}</p>
+            <p v-if="resource.description"><b>Description: </b> {{ resource.description }}</p>
+            <p><b>Link: </b>{{ resource.link }}</p>
+          </div>
           <button
             type="button"
             class="close"
@@ -24,9 +27,16 @@
 <script>
 import { mdbListGroup, mdbListGroupItem } from "mdbvue";
 import AddSourceForm from "./AddSourceForm";
+import { SOURCE_REMOVE, SOURCES_REQUEST } from "@/store/actions/resources";
 
 export default {
   name: "ListGroupPage",
+  data: () => {
+     return {
+       updateInterval: undefined,
+       interval: 5000
+     }
+  },
   components: {
     mdbListGroup,
     mdbListGroupItem,
@@ -34,20 +44,37 @@ export default {
   },
   computed: {
     resources() {
-      return this.$store.getters.getResources;
+      return this.$store.getters.resources
     }
   },
+  mounted() {
+    this.updateResources()
+    this.updateInterval = setInterval(this.updateResources, this.interval);
+  },
+  beforeDestroy () {
+    clearInterval(this.intervalid1)
+  },
   methods: {
+    updateResources() {
+      this.$store.dispatch(SOURCES_REQUEST);
+    },
     removeResource(id) {
-      this.$store.dispatch("removeResource", id);
+      this.$store.dispatch(
+        SOURCE_REMOVE,
+        id
+      );
     }
   }
 };
 </script>
 
 <style scoped>
-.resources {
-  max-width: 500px;
+
+.resource-info {
+  max-width: 100%;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
 }
 
 .source {
@@ -67,5 +94,9 @@ export default {
 
 .btn-secondary {
   background-color: royalblue !important;
+}
+
+.resources-block {
+  width: 90%;
 }
 </style>

@@ -2,10 +2,10 @@
   <mdb-container class="sign-up-container">
     <mdb-jumbotron class="text-center hoverable">
       <form @submit.prevent="signup">
-        <mdb-avatar class="mx-auto white">
+        <mdb-avatar class="mx-auto">
           <img
-            src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
-            class="rounded-circle img-fluid"
+            src="https://image.flaticon.com/icons/svg/18/18601.svg"
+            class="rounded-circle img-fluid"           
           />
         </mdb-avatar>
         <div class="input-group">
@@ -133,6 +133,8 @@ export default {
 
 .img-fluid {
   padding: 5px;
+  max-width: 60%;
+  height: auto;
 }
 
 .md-form {

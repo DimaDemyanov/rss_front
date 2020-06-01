@@ -19,6 +19,10 @@ const ifAuthenticated = (to, from, next) => {
 const routes = [
   {
     path: "/",
+    redirect: "/rss"
+  },
+  {
+    path: "/rss",
     name: "Rss Feed",
     component: Rss,
     beforeEnter: ifAuthenticated
