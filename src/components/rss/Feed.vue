@@ -1,5 +1,5 @@
 <template>
-  <div v-if="error" class="error">{{ error }}</div>
+  <div v-if="false" class="error">{{ error }}</div>
   <div v-else class="feed">
     <h1 v-if="name">{{ name }}</h1>
     <h1 v-else>{{ feed.title }}</h1>
@@ -10,7 +10,7 @@
     </div>
     <div class="articles-container">
       <Article
-        v-for="(article, index) of getArticles()"
+        v-for="(article, index) of newsItems"
         v-bind:key="index"
         v-bind:article="article"
       />
@@ -20,7 +20,7 @@
 
 <script>
 import Article from "./article";
-import RSSParser from "rss-parser";
+import { NEWS_ERASE, NEWS_REQUEST_NEXT_PAGE } from "@/store/actions/news";
 
 export default {
   name: "Feed",
@@ -28,68 +28,25 @@ export default {
     Article
   },
   props: {
-    feedUrl: String,
-    name: String,
     limit: Number,
-    loadMore: Boolean
   },
   data() {
     return {
-      loading: true,
-      error: "",
-      feed: {}
+      name: "News List"
     };
   },
+  computed: {
+    newsItems() {
+      return this.$store.getters.newsItems
+    },
+    loading() {
+      return this.$store.getters.isNewsLoaidng
+    }
+  },
   created() {
-    this.fetchData();
+    this.$store.commit(NEWS_ERASE);
+    this.$store.dispatch(NEWS_REQUEST_NEXT_PAGE);
   },
-  watch: {
-    feedUrl() {
-      this.fetchData();
-    },
-    limit(newVal, oldVal) {
-      if (newVal !== oldVal) {
-        this.getArticles();
-      }
-    }
-  },
-  methods: {
-    async fetchData() {
-      this.error = "";
-      this.loading = true;
-      this.feed = {};
-      try {
-        const data = await fetch(this.feedUrl);
-        if (data.ok) {
-          const text = await data.text();
-          const parser = new RSSParser();
-          parser.parseString(text, (err, parsed) => {
-            this.loading = false;
-            if (err) {
-              this.error = `Error occured while parsing RSS Feed ${err.toString()}`;
-            } else {
-              this.feed = parsed;
-            }
-          });
-        } else {
-          this.error = "Error occured while fetching the feed";
-          this.loading = false;
-        }
-      } catch (e) {
-        if (e.toString() === "TypeError: Failed to fetch") {
-          this.error = "Error due to CORS policy";
-        } else {
-          this.error = e.toString();
-        }
-        this.loading = false;
-      }
-    },
-    getArticles() {
-      if (this.feed.items && this.feed.items) {
-        return this.feed.items.slice(0, this.limit);
-      }
-    }
-  }
 };
 </script>
 

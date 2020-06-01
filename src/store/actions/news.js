@@ -1,0 +1,7 @@
+export const NEWS_REQUEST_NEXT_PAGE = "NEWS_REQUEST_NEXT_PAGE";
+export const NEWS_EXPAND = "NEWS_EXPAND";
+export const NEWS_INC_PAGE = "NEWS_INC_PAGE";
+export const NEWS_SET_MAXPAGE = "NEWS_SET_MAXPAGE";
+export const NEWS_ERASE = "NEWS_ERASE";
+export const NEWS_LOADING = "NEWS_LOADING";
+export const NEWS_LOADED = "NEWS_LOADED";

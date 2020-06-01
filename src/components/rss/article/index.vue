@@ -79,10 +79,7 @@ export default {
       }
     },
     changeFavorite() {
-      this.isFavorite = !this.isFavorite;
-      if (this.isFavorite) {
-      } else {
-      }
+      this.article.favourite = !this.article.favourite
     }
   }
 };
@@ -159,5 +156,10 @@ a {
 
 button:focus {
     outline: 0px;
+}
+
+.content >>> img {
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>

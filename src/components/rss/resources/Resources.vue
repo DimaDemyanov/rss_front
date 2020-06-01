@@ -33,13 +33,14 @@
 import { mdbListGroup, mdbListGroupItem } from "mdbvue";
 import AddSourceForm from "./AddSourceForm";
 import { SOURCE_SET_CURRENT, SOURCE_REMOVE, SOURCES_REQUEST } from "@/store/actions/resources";
+import { NEWS_ERASE, NEWS_REQUEST_NEXT_PAGE } from "@/store/actions/news";
 
 export default {
   name: "ListGroupPage",
   data: () => {
      return {
        updateInterval: undefined,
-       interval: 5000
+       interval: 15000
      }
   },
   components: {
@@ -69,6 +70,8 @@ export default {
       } else {
         this.$store.commit(SOURCE_SET_CURRENT, id);
       }
+      this.$store.commit(NEWS_ERASE);
+      this.$store.dispatch(NEWS_REQUEST_NEXT_PAGE, this.current);
     },
     updateResources() {
       this.$store.dispatch(SOURCES_REQUEST);
@@ -78,6 +81,9 @@ export default {
         SOURCE_REMOVE,
         id
       );
+      if (id === this.current) {
+        this.setCurrent(undefined)
+      }
     }
   }
 };

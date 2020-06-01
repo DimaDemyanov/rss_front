@@ -7,18 +7,18 @@
       <FilterS />
     </div>
     <div class="rss-feeds">
-      <VueRssFeed :feedUrl="feedUrl" :name="name" :limit="limit" />
+      <VueRssFeed :limit="limit" />
     </div>
   </div>
 </template>
 
 <script>
-import VueRssFeed from "../components/rss/VueRssFeed.vue";
-import Resources from "../components/rss/resources/Resources.vue";
-import FilterS from "../components/rss/Filter.vue";
+import VueRssFeed from "@/components/rss/VueRssFeed.vue";
+import Resources from "@/components/rss/resources/Resources.vue";
+import FilterS from "@/components/rss/Filter.vue";
 
 export default {
-  name: "Demo",
+  name: "RSS",
   components: {
     VueRssFeed,
     Resources,
@@ -26,8 +26,6 @@ export default {
   },
   data() {
     return {
-      feedUrl: "https://rss.app/feeds/hmsyAr3PyniBpmOd.xml",
-      name: "",
       limit: 5
     };
   }
@@ -41,6 +39,7 @@ export default {
   position: sticky;
   float: left;
   top: 0;
+  paddind: 10px;
 }
 
 .rss-feeds {
