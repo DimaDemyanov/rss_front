@@ -2,8 +2,7 @@
   <mdb-navbar expand="large" dark color="indigo">
     <mdb-navbar-brand href="#">
       <router-link class="brand" to="/">
-        <img src="../../assets/logo.png" width="40px" />
-        <strong>RSS FEEDS</strong>
+        <strong>Potato RSS Feeds</strong>
       </router-link>
     </mdb-navbar-brand>
     <mdb-navbar-toggler>

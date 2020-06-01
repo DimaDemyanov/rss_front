@@ -1,6 +1,7 @@
 // import Vue from "vue";
 import {
   SOURCES_REQUEST,
+  SOURCE_SET_CURRENT,
   SOURCES_UPDATE,
   SOURCE_ADD,
   SOURCE_ADD_ERROR,
@@ -19,10 +20,12 @@ const sourcePath = "/sources";
 const state = {
   removeStatus: "",
   addStatus: "",
-  resources: []
+  resources: [],
+  current: undefined
 };
 
 const getters = {
+  currentResources: state => state.current,
   resources: state => state.resources
 };
 
@@ -127,6 +130,9 @@ const mutations = {
   },
   [SOURCE_REMOVE_ERROR]: (state) => {
     state.removeStatus = `error ${id}`;
+  },
+  [SOURCE_SET_CURRENT]: (state, id) => {
+    state.current = id;
   },
 };
 

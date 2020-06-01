@@ -4,8 +4,13 @@
     />
     <ul>
       <mdb-list-group>
-        <mdb-list-group-item class="source" v-for="resource in resources" v-bind:key="resource.id">
-          <div class="resource-info">
+        <mdb-list-group-item
+          v-for="resource in resources"
+          v-bind:class="{source: true}"
+          :active="resource.id == current"
+          v-bind:key="resource.id">
+          <div class="resource-info"
+               @click="setCurrent(resource.id)">
             <p><b>Title: </b>{{ resource.title }}</p>
             <p v-if="resource.description"><b>Description: </b> {{ resource.description }}</p>
             <p><b>Link: </b>{{ resource.link }}</p>
@@ -27,7 +32,7 @@
 <script>
 import { mdbListGroup, mdbListGroupItem } from "mdbvue";
 import AddSourceForm from "./AddSourceForm";
-import { SOURCE_REMOVE, SOURCES_REQUEST } from "@/store/actions/resources";
+import { SOURCE_SET_CURRENT, SOURCE_REMOVE, SOURCES_REQUEST } from "@/store/actions/resources";
 
 export default {
   name: "ListGroupPage",
@@ -43,6 +48,9 @@ export default {
     AddSourceForm
   },
   computed: {
+    current() {
+      return this.$store.getters.currentResources
+    },
     resources() {
       return this.$store.getters.resources
     }
@@ -55,6 +63,13 @@ export default {
     clearInterval(this.intervalid1)
   },
   methods: {
+    setCurrent(id) {
+      if (id === this.current) {
+        this.$store.commit(SOURCE_SET_CURRENT, undefined);
+      } else {
+        this.$store.commit(SOURCE_SET_CURRENT, id);
+      }
+    },
     updateResources() {
       this.$store.dispatch(SOURCES_REQUEST);
     },
@@ -98,5 +113,9 @@ export default {
 
 .resources-block {
   width: 90%;
+}
+
+.current {
+ background-color: royalblue !important;
 }
 </style>
