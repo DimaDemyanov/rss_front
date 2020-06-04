@@ -12,6 +12,9 @@ export default {
   components: {
     Feed
   },
+   mounted() {
+
+   },
   props: {
     limit: Number
   }

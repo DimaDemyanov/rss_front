@@ -3,7 +3,10 @@ import apiCall from "../../utils/api";
 import Vue from "vue";
 import { AUTH_LOGOUT } from "../actions/auth";
 
-const state = { status: "", profile: {} };
+const state = {
+  status: "",
+  profile: {}
+};
 
 const getters = {
   getProfile: state => state.profile,

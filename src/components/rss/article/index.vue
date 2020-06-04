@@ -16,11 +16,14 @@
       </div>
     </div>
     <div class="article-tags">
-      <Tags/>
+      <Tags
+        v-bind:tags="tags"
+        v-bind:newsID="newsID"
+      />
     </div>
     <button
       class="favorite"
-      v-bind:class="{'favorite-on': isFavorite, 'favorite-off': !isFavorite}"
+      v-bind:class="{'favorite-on': article.favourite, 'favorite-off': !article.favourite}"
       v-on:click="changeFavorite()"
     ></button>
   </div>
@@ -28,6 +31,7 @@
 
 <script>
 import Tags from "./tags/Tags.vue";
+import { NEWS_SWAP_FAVOURITE } from "@/store/actions/news";
 
 const parseDate = tdate => {
   const systemDate = new Date(Date.parse(tdate));
@@ -59,11 +63,17 @@ export default {
   components: {
     Tags
   },
-  data() {
-    return {
-      isFavorite: false
-    };
-  },
+   computed: {
+     newsID() {
+       return this.article.id
+     },
+     tags() {
+       return this.article.tags
+     }
+   },
+   mounted() {
+
+   },
   methods: {
     getHostname() {
       try {
@@ -74,12 +84,10 @@ export default {
       }
     },
     getDateTime() {
-      if (this.article.isoDate) {
-        return parseDate(this.article.isoDate);
-      }
+      return new Date(this.article.date)
     },
     changeFavorite() {
-      this.article.favourite = !this.article.favourite
+      this.$store.dispatch(NEWS_SWAP_FAVOURITE, this.article.id)
     }
   }
 };

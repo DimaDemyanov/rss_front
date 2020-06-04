@@ -13,9 +13,9 @@
       <mdb-container>
         <mdb-jumbotron class="text-center hoverable">
           <form>
-            <mdb-avatar class="mx-auto white">
+            <mdb-avatar class="mx-auto">
               <img
-                src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
+                src="https://image.flaticon.com/icons/svg/18/18601.svg"
                 class="rounded-circle img-fluid"
               />
             </mdb-avatar>
@@ -128,6 +128,8 @@ export default {
 
 .img-fluid {
   padding: 5px;
+  max-width: 60%;
+  height: auto;
 }
 
 .md-form {

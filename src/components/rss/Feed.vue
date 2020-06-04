@@ -3,17 +3,17 @@
   <div v-else class="feed">
     <h1 v-if="name">{{ name }}</h1>
     <h1 v-else>{{ feed.title }}</h1>
-    <div v-if="loading" class="spinner">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
-    </div>
     <div class="articles-container">
       <Article
         v-for="(article, index) of newsItems"
         v-bind:key="index"
         v-bind:article="article"
       />
+     <div v-if="loading" class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+     </div>
     </div>
   </div>
 </template>
@@ -34,6 +34,20 @@ export default {
     return {
       name: "News List"
     };
+  },
+   methods: {
+    scroll () {
+      window.onscroll = () => {
+        let bottomOfWindow = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) + 10 + window.innerHeight >= document.documentElement.offsetHeight
+        if (bottomOfWindow) {
+          this.$store.dispatch(NEWS_REQUEST_NEXT_PAGE, this.$store.getters.currentResources);
+          console.log(this.$store.getters.currentPage)
+        }
+      }
+    }
+  },
+  mounted () {
+    this.scroll()
   },
   computed: {
     newsItems() {

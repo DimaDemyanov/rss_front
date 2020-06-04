@@ -15,6 +15,7 @@ export default {
     Navigation
   },
   name: "app",
+
   created: function() {
     // if (this.$store.getters.isAuthenticated) {
     //   this.$store.dispatch(USER_REQUEST);

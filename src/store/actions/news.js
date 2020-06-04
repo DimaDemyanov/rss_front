@@ -5,3 +5,6 @@ export const NEWS_SET_MAXPAGE = "NEWS_SET_MAXPAGE";
 export const NEWS_ERASE = "NEWS_ERASE";
 export const NEWS_LOADING = "NEWS_LOADING";
 export const NEWS_LOADED = "NEWS_LOADED";
+export const NEWS_SWAP_FAVOURITE = "NEWS_SWAP_FAVOURITE";
+export const NEWS_TAG_ADD = "NEWS_TAG_ADD";
+export const NEWS_TAG_REMOVE = "NEWS_TAG_REMOVE";

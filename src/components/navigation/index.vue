@@ -24,7 +24,8 @@ import {
   mdbNavItem
 } from "mdbvue";
 import { mapGetters, mapState } from "vuex";
-import { AUTH_LOGOUT } from "../../store/actions/auth";
+import { AUTH_LOGOUT } from "@/store/actions/auth";
+import { USER_REQUEST } from "@/store/actions/user";
 
 export default {
   name: "HelloWorld",
@@ -34,6 +35,11 @@ export default {
     mdbNavbarToggler,
     mdbNavbarNav,
     mdbNavItem
+  },
+  mounted: function() {
+    if ((!this.isProfileLoaded) && this.isAuthenticated) {
+      this.$store.dispatch(USER_REQUEST);
+    }
   },
   methods: {
     logout: function() {
